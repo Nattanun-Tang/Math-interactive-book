@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>แผนภาพเวนน์ | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/katex/katex.min.js"></script>
+  <script defer src="vendor/katex/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">แผนภาพเวนน์ (Venn diagram)</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="../../452492_0.jpg"
+            alt=""
+            width="660"
+            height="720"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <div>
+            <h1 id="appTitle" class="app-header__title" tabindex="-1">หัวข้อการเรียนรู้</h1>
+          </div>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout venn-app" data-set-count="2" data-member-type="numbers">
+            <div class="venn-workspace">
+              <aside id="vennSidebar" class="venn-sidebar" aria-label="แผงควบคุม">
+                <button
+                  type="button"
+                  id="sidebarToggle"
+                  class="venn-sidebar__toggle"
+                  aria-expanded="true"
+                  aria-controls="vennSidebarBody"
+                  aria-label="ย่อแผงควบคุม"
+                  title="ย่อ/ขยายแผงควบคุม"
+                >
+                  <span class="venn-sidebar__burger" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+
+                <div id="vennSidebarBody" class="venn-sidebar__body">
+                  <section class="venn-panel" aria-labelledby="setCountLabel">
+                    <h2 id="setCountLabel" class="venn-panel__title">จำนวนเซต</h2>
+                    <div class="segmented" role="radiogroup" aria-labelledby="setCountLabel">
+                      <button type="button" class="segmented__btn is-active" data-set-count="2" role="radio" aria-checked="true">2 เซต</button>
+                      <button type="button" class="segmented__btn" data-set-count="3" role="radio" aria-checked="false">3 เซต</button>
+                    </div>
+                  </section>
+
+                  <section class="venn-panel" aria-labelledby="memberTypeLabel">
+                    <h2 id="memberTypeLabel" class="venn-panel__title">รูปแบบของสมาชิก</h2>
+                    <div class="segmented" role="radiogroup" aria-labelledby="memberTypeLabel">
+                      <button type="button" class="segmented__btn is-active" data-member-type="numbers" role="radio" aria-checked="true">ตัวเลข</button>
+                      <button type="button" class="segmented__btn" data-member-type="letters" role="radio" aria-checked="false">ตัวอักษร</button>
+                    </div>
+                  </section>
+
+                  <section class="venn-panel venn-panel--bank" aria-labelledby="memberBankLabel">
+                    <h2 id="memberBankLabel" class="venn-panel__title">ลากสมาชิกไปวางบนแผนภาพ</h2>
+                    <div id="memberBank" class="member-bank" role="list" aria-label="สมาชิกที่ยังไม่อยู่ในแผนภาพ"></div>
+                  </section>
+
+                  <div class="venn-sidebar__bottom">
+                    <fieldset id="opToggles" class="op-toggles" aria-labelledby="opTogglesLegend">
+                      <legend id="opTogglesLegend" class="op-toggles__legend">การดำเนินการ</legend>
+                      <div class="op-toggles__grid">
+                        <label class="op-toggles__item">
+                          <input type="checkbox" data-op="union" />
+                          <span id="opLabelUnion">ยูเนียน</span>
+                        </label>
+                        <label class="op-toggles__item">
+                          <input type="checkbox" data-op="intersection" />
+                          <span id="opLabelIntersection">อินเตอร์เซคชัน</span>
+                        </label>
+                        <label class="op-toggles__item">
+                          <input type="checkbox" data-op="difference" />
+                          <span id="opLabelDifference">ผลต่าง</span>
+                        </label>
+                        <label class="op-toggles__item">
+                          <input type="checkbox" data-op="complement" />
+                          <span id="opLabelComplement">คอมพลีเมนต์</span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </aside>
+
+              <div class="venn-main">
+                <section class="diagram-stage" aria-label="แผนภาพเวนน์">
+                  <div id="diagramViewport" class="diagram-viewport">
+                    <svg id="vennSvg" class="venn-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vennSvgTitle">
+                      <title id="vennSvgTitle">แผนภาพเวนน์ของเซตในยูนิเวอร์แซลเซต U</title>
+                      <rect id="universalRect" class="universal-rect" x="0" y="0" width="1000" height="620" rx="18" ry="18"/>
+                      <text id="labelU" class="universal-label" x="28" y="22" dominant-baseline="hanging" aria-hidden="true">U</text>
+                      <g id="circleLayer"></g>
+                      <g id="highlightLayer"></g>
+                    </svg>
+                    <div id="labelOverlay" class="label-overlay" aria-hidden="true">
+                      <span id="labelA" class="math-label math-label--a">$A$</span>
+                      <span id="labelB" class="math-label math-label--b">$B$</span>
+                      <span id="labelC" class="math-label math-label--c" hidden>$C$</span>
+                    </div>
+                    <div id="tokenLayer" class="token-layer" aria-label="สมาชิกบนแผนภาพ"></div>
+                  </div>
+                  <button
+                    id="resetButton"
+                    type="button"
+                    class="stage-reset"
+                    aria-label="รีเซต"
+                    title="รีเซต"
+                  >
+                    <svg class="stage-reset__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                      <path
+                        d="M21 12a9 9 0 1 1-3-6.7"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M21 3v6h-6"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </section>
+
+                <section class="set-repr" aria-label="ผลลัพธ์ของเซต">
+                  <h2 id="setReprTitle" class="set-repr__title visually-hidden">ผลลัพธ์ของเซต</h2>
+                  <div id="setEquations" class="set-repr__equations" aria-live="polite"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </main>
+        <div id="dragFloatLayer" class="drag-float-layer" aria-hidden="true"></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

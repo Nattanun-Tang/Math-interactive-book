@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>สัจนิรันดร์ | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">สัจนิรันดร์</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="../../452493_0.jpg"
+            alt=""
+            width="1024"
+            height="437"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">สัจนิรันดร์</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout taut-app is-study-mode" data-method="truth">
+            <div class="taut-toolbar">
+              <div class="taut-toolbar__left">
+                <div class="taut-control">
+                  <span id="modeLabel" class="taut-toolbar__label">โหมด</span>
+                  <div id="modeToggle" class="seg" role="radiogroup" aria-labelledby="modeLabel">
+                    <button type="button" class="seg__btn is-active" data-mode="study" role="radio" aria-checked="true">ศึกษา</button>
+                    <button type="button" class="seg__btn" data-mode="test" role="radio" aria-checked="false">ทดสอบ</button>
+                  </div>
+                </div>
+
+                <div id="methodControl" class="taut-control">
+                  <label class="taut-toolbar__label" for="methodSelect">วิธีการตรวจสอบ</label>
+                  <select id="methodSelect" class="method-select" aria-label="วิธีการตรวจสอบ"></select>
+                </div>
+              </div>
+              <div class="taut-toolbar__right">
+                <button id="infoBtn" class="info-btn" type="button" aria-label="ความหมาย" title="ความหมาย">
+                  <span class="info-btn__glyph" aria-hidden="true">i</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="studyPanel" class="study-panel">
+              <div class="taut-nav" aria-label="เลือกข้อ">
+                <p id="questionLabel" class="taut-nav__label">ข้อ 1/5</p>
+                <div class="taut-nav__dots" role="group" aria-label="เลื่อนข้อ">
+                  <button id="prevQuestionBtn" class="nav-arrow" type="button" aria-label="ข้อก่อนหน้า">&lt;</button>
+                  <div id="questionDots" class="question-dots"></div>
+                  <button id="nextQuestionBtn" class="nav-arrow" type="button" aria-label="ข้อถัดไป">&gt;</button>
+                </div>
+              </div>
+
+              <div id="promptBox" class="prompt-box" aria-live="polite"></div>
+
+              <section id="truthPanel" class="work-panel truth-panel" aria-label="ตารางค่าความจริง">
+                <div class="table-scroll">
+                  <div class="table-stack">
+                    <table id="truthTable" class="practice-table" aria-label="ตารางค่าความจริง"></table>
+                  </div>
+                </div>
+                <div class="panel-actions">
+                  <p id="truthConclusion" class="conclusion-line" hidden></p>
+                  <p id="checkPopup" class="check-popup" role="alert" hidden>เติมคำตอบให้ครบถ้วน</p>
+                  <button id="checkBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                  <button id="revealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+                </div>
+              </section>
+
+              <section id="contraPanel" class="work-panel contra-panel" aria-label="หาข้อขัดแย้ง" hidden>
+                <p id="assumeBox" class="assume-box" aria-live="polite"></p>
+                <div id="treeStage" class="tree-stage" aria-label="ต้นไม้ค่าความจริง"></div>
+                <div class="panel-actions">
+                  <p id="contraConclusion" class="conclusion-line" hidden></p>
+                  <p id="contraCheckPopup" class="check-popup" role="alert" hidden>เติมคำตอบให้ครบถ้วน</p>
+                  <button id="contraCheckBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                  <button id="contraRevealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+                </div>
+              </section>
+            </div>
+
+            <section id="testPanel" class="test-panel" hidden>
+              <div class="test-builder" aria-label="สร้างนิพจน์ด้วยแผ่นป้าย">
+                <p id="tilesLabel" class="tiles-label">สร้างรูปแบบประพจน์ด้วยแผ่นป้าย</p>
+                <div id="tilePalette" class="tile-palette" role="group" aria-labelledby="tilesLabel"></div>
+
+                <div class="expr-bar">
+                  <p id="exprError" class="expr-error" role="alert" hidden>เขียนนิพจน์ไม่ถูกต้องตามหลักการ</p>
+                  <div class="expr-bar__body">
+                    <div class="expr-bar__line">
+                      <span id="exprLabel" class="expr-bar__label">นิพจน์ :</span>
+                      <div id="exprLine" class="expr-line" role="list" aria-labelledby="exprLabel"></div>
+                    </div>
+                    <div class="expr-bar__actions">
+                      <button id="exprBackspace" class="expr-icon-btn" type="button" aria-label="ลบ" title="ลบ">
+                        <svg class="expr-icon-btn__svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                          <path d="M8.5 5.5H20a1.5 1.5 0 0 1 1.5 1.5v10A1.5 1.5 0 0 1 20 18.5H8.5L3.2 12.8a1.2 1.2 0 0 1 0-1.6L8.5 5.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                          <path d="M11.2 9.2l5.6 5.6M16.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <button id="exprClear" class="expr-icon-btn" type="button" aria-label="ล้างนิพจน์" title="ล้างนิพจน์">
+                        <span class="expr-icon-btn__letter" aria-hidden="true">C</span>
+                      </button>
+                      <button id="exprShowBtn" class="expr-show-btn" type="button">สร้าง</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <section id="testExercisePanel" class="work-panel contra-panel test-exercise" hidden aria-label="ตรวจสอบสัจนิรันดร์โดยหาข้อขัดแย้ง">
+                <button id="testResetBtn" class="stage-reset" type="button" aria-label="รีเฟรช" title="รีเฟรช">
+                  <svg class="stage-reset__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                    <path d="M21 12a9 9 0 1 1-3-6.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <p id="testAssumeBox" class="assume-box" aria-live="polite"></p>
+                <div id="testTreeStage" class="tree-stage" aria-label="ต้นไม้ค่าความจริง"></div>
+                <div class="panel-actions">
+                  <p id="testConclusion" class="conclusion-line" hidden></p>
+                  <p id="testCheckPopup" class="check-popup" role="alert" hidden>เติมคำตอบให้ครบถ้วน</p>
+                  <button id="testCheckBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                  <button id="testRevealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+                </div>
+              </section>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div id="defModal" class="modal" hidden>
+    <div class="modal__backdrop" data-close="def"></div>
+    <div class="modal__card modal__card--def" role="dialog" aria-modal="true" aria-labelledby="defModalTitle">
+      <button id="defCloseBtn" class="modal__close" type="button" aria-label="ปิด">&times;</button>
+      <p id="defModalTitle" class="modal__title visually-hidden">ความหมาย</p>
+      <div id="defModalBody" class="modal__body"></div>
+    </div>
+  </div>
+</body>
+</html>

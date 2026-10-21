@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>การดำเนินการของเซต | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">การดำเนินการของเซต</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="../../452492_0.jpg"
+            alt=""
+            width="1115"
+            height="1217"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">การดำเนินการของเซต</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout ops-app is-study-mode">
+            <div class="ops-controls" role="group" aria-label="ตั้งค่าการดำเนินการ">
+              <div class="ops-control">
+                <span id="modeLabel" class="ops-control__label">โหมด</span>
+                <div id="modeToggle" class="seg" role="radiogroup" aria-labelledby="modeLabel">
+                  <button type="button" class="seg__btn is-active" data-mode="study" role="radio" aria-checked="true">ศึกษา</button>
+                  <button type="button" class="seg__btn" data-mode="test" role="radio" aria-checked="false">ทดสอบ</button>
+                </div>
+              </div>
+
+              <div class="ops-control">
+                <span id="setCountLabel" class="ops-control__label">จำนวนเซต</span>
+                <div class="seg" role="group" aria-labelledby="setCountLabel">
+                  <button type="button" class="seg__btn is-active" data-set-count="2">2 เซต</button>
+                  <button type="button" class="seg__btn" data-set-count="3">3 เซต</button>
+                </div>
+              </div>
+
+              <div class="ops-control">
+                <span id="memberTypeLabel" class="ops-control__label">รูปแบบของสมาชิก</span>
+                <div class="seg" role="group" aria-labelledby="memberTypeLabel">
+                  <button type="button" class="seg__btn is-active" data-member-type="numbers">ตัวเลข</button>
+                  <button type="button" class="seg__btn" data-member-type="letters">ตัวอักษร</button>
+                </div>
+              </div>
+
+              <div id="operationControl" class="ops-control ops-control--op">
+                <label id="operationLabel" class="ops-control__label" for="operationSelect">ตัวดำเนินการ</label>
+                <select id="operationSelect" class="ops-select" aria-labelledby="operationLabel"></select>
+              </div>
+            </div>
+
+            <section id="definitionBox" class="ops-definition" aria-live="polite" hidden></section>
+
+            <div class="ops-member-stage">
+              <p id="memberHint" class="ops-hint"></p>
+              <section id="memberPanel" class="ops-members" aria-label="เลือกสมาชิกของเซต"></section>
+            </div>
+
+            <div id="variantPanel" class="ops-variants" role="group" aria-label="เลือกการดำเนินการ" hidden></div>
+
+            <section id="studyBuilder" class="ops-study-builder" aria-label="สร้างนิพจน์ด้วยแผ่นป้าย" hidden>
+              <p id="tilesLabel" class="ops-tiles-label">สร้างนิพจน์ด้วยแผ่นป้าย</p>
+              <div id="tilePalette" class="tile-palette" role="group" aria-labelledby="tilesLabel"></div>
+
+              <div class="expr-bar">
+                <p id="exprError" class="expr-error" role="alert" hidden>เขียนเซตไม่ถูกต้องตามหลักการ</p>
+                <div class="expr-bar__body">
+                  <div class="expr-bar__line">
+                    <span id="exprLabel" class="expr-bar__label">นิพจน์ :</span>
+                    <div id="exprLine" class="expr-line" role="list" aria-labelledby="exprLabel"></div>
+                  </div>
+                  <div class="expr-bar__actions">
+                    <button id="exprBackspace" class="expr-icon-btn" type="button" aria-label="ลบ" title="ลบ">
+                      <svg class="expr-icon-btn__svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                        <path d="M8.5 5.5H20a1.5 1.5 0 0 1 1.5 1.5v10A1.5 1.5 0 0 1 20 18.5H8.5L3.2 12.8a1.2 1.2 0 0 1 0-1.6L8.5 5.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M11.2 9.2l5.6 5.6M16.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                      </svg>
+                    </button>
+                    <button id="exprClear" class="expr-icon-btn" type="button" aria-label="ล้างนิพจน์" title="ล้างนิพจน์">
+                      <span class="expr-icon-btn__letter" aria-hidden="true">C</span>
+                    </button>
+                    <button id="exprShowBtn" class="expr-show-btn" type="button">แสดง</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="resultBox" class="ops-result" aria-live="polite"></section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

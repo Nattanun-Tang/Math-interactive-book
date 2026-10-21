@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>จำนวนสมาชิกของเซตจำกัด | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/katex/katex.min.js"></script>
+  <script defer src="vendor/katex/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">จำนวนสมาชิกของเซตจำกัด</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="../../452492_0.jpg"
+            alt=""
+            width="528"
+            height="576"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <div>
+            <h1 id="appTitle" class="app-header__title" tabindex="-1">จำนวนสมาชิกของเซตจำกัด</h1>
+          </div>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout proof-app" data-sets="2" data-step="0">
+            <aside class="proof-stage" aria-label="แผนภาพเวนน์">
+              <div class="set-toggle-row">
+                <span id="setCountLabel" class="set-toggle-row__label"><strong>จำนวนเซต</strong></span>
+                <div class="segmented" role="radiogroup" aria-labelledby="setCountLabel">
+                  <button type="button" class="segmented__btn is-active" data-sets="2" role="radio" aria-checked="true">2 เซต</button>
+                  <button type="button" class="segmented__btn" data-sets="3" role="radio" aria-checked="false">3 เซต</button>
+                </div>
+              </div>
+
+              <div id="vennMount" class="venn-mount" aria-live="polite"></div>
+
+              <div id="unionFormula" class="union-formula" aria-live="polite"></div>
+            </aside>
+
+            <section class="proof-panel" aria-label="การพิสูจน์">
+              <div class="proof-panel__main">
+                <p id="proofIntro" class="proof-intro"></p>
+
+                <div class="proof-actions" role="group" aria-label="ควบคุมการพิสูจน์">
+                  <button id="proveBtn" class="proof-btn" type="button">พิสูจน์</button>
+                  <button id="prevBtn" class="proof-btn" type="button" disabled>ก่อนหน้า</button>
+                  <button id="nextBtn" class="proof-btn" type="button" disabled>ถัดไป</button>
+                </div>
+
+                <div class="proof-steps-scroll">
+                  <div id="proofSteps" class="proof-steps" aria-live="polite"></div>
+                </div>
+              </div>
+
+              <div id="stepSummary" class="step-summary" aria-live="polite"></div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

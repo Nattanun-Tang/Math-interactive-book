@@ -1,0 +1,11 @@
+interface:
+  display_name: Educational App Builder Pro
+  short_description: Build polished interactive educational web apps from a professional
+    starter.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

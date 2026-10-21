@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>รูปแบบประพจน์ที่สมมูลกัน | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">รูปแบบประพจน์ที่สมมูลกัน</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="../../452493_0.jpg"
+            alt=""
+            width="1024"
+            height="428"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">รูปแบบประพจน์ที่สมมูลกัน</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout equiv-app" data-method="truth">
+            <div class="equiv-toolbar">
+              <div class="equiv-toolbar__left">
+                <label class="equiv-toolbar__label" for="methodSelect">วิธีการตรวจสอบ</label>
+                <select id="methodSelect" class="method-select" aria-label="วิธีการตรวจสอบ"></select>
+              </div>
+              <div class="equiv-toolbar__right">
+                <button id="formulasBtn" class="formulas-btn" type="button" hidden>รูปแบบประพจน์ที่สมมูลกัน</button>
+                <button id="infoBtn" class="info-btn" type="button" aria-label="ความหมาย" title="ความหมาย">
+                  <span class="info-btn__glyph" aria-hidden="true">i</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="equiv-nav" aria-label="เลือกข้อ">
+              <p id="questionLabel" class="equiv-nav__label">ข้อ 1/5</p>
+              <div class="equiv-nav__dots" role="group" aria-label="เลื่อนข้อ">
+                <button id="prevQuestionBtn" class="nav-arrow" type="button" aria-label="ข้อก่อนหน้า">&lt;</button>
+                <div id="questionDots" class="question-dots"></div>
+                <button id="nextQuestionBtn" class="nav-arrow" type="button" aria-label="ข้อถัดไป">&gt;</button>
+              </div>
+            </div>
+
+            <div id="promptBox" class="prompt-box" aria-live="polite"></div>
+
+            <section id="truthPanel" class="work-panel truth-panel" aria-label="ตารางค่าความจริง">
+              <div class="table-scroll">
+                <div class="table-stack">
+                  <table id="truthTable" class="practice-table" aria-label="ตารางค่าความจริง"></table>
+                </div>
+              </div>
+              <div class="panel-actions">
+                <p id="truthConclusion" class="conclusion-line" hidden></p>
+                <p id="checkPopup" class="check-popup" role="alert" hidden>เติมคำตอบให้ครบถ้วน</p>
+                <button id="checkBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                <button id="revealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+              </div>
+            </section>
+
+            <section id="proofPanel" class="work-panel proof-panel" aria-label="ใช้รูปแบบประพจน์ที่สมมูลกัน" hidden>
+              <div id="proofBox" class="proof-box proof-box--idle" aria-live="polite"></div>
+              <div class="panel-actions panel-actions--proof">
+                <button id="prevStepBtn" class="action-btn action-btn--accent" type="button" disabled>ก่อนหน้า</button>
+                <button id="nextStepBtn" class="action-btn action-btn--accent" type="button">ถัดไป</button>
+                <button id="allStepsBtn" class="action-btn action-btn--accent" type="button">ทั้งหมด</button>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div id="defModal" class="modal" hidden>
+    <div class="modal__backdrop" data-close="def"></div>
+    <div class="modal__card modal__card--def" role="dialog" aria-modal="true" aria-labelledby="defModalTitle">
+      <button id="defCloseBtn" class="modal__close" type="button" aria-label="ปิด">&times;</button>
+      <p id="defModalTitle" class="modal__title visually-hidden">ความหมาย</p>
+      <p id="defModalBody" class="modal__body"></p>
+    </div>
+  </div>
+
+  <div id="formulasModal" class="modal" hidden>
+    <div class="modal__backdrop" data-close="formulas"></div>
+    <div class="modal__card modal__card--formulas" role="dialog" aria-modal="true" aria-labelledby="formulasModalTitle">
+      <button id="formulasCloseBtn" class="modal__close" type="button" aria-label="ปิด">&times;</button>
+      <h2 id="formulasModalTitle" class="modal__heading"></h2>
+      <ol id="formulasList" class="formulas-list"></ol>
+    </div>
+  </div>
+</body>
+</html>

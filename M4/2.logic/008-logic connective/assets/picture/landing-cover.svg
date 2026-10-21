@@ -1,0 +1,30 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="660" height="720" viewBox="0 0 660 720" fill="none">
+  <rect width="660" height="720" fill="#f5f7f9"/>
+  <rect x="70" y="80" width="520" height="560" rx="28" fill="#fff" stroke="#c8d0d8" stroke-width="3"/>
+  <text x="330" y="150" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="36" font-weight="700" fill="#e71312">p ∧ q</text>
+  <rect x="140" y="190" width="380" height="280" rx="12" fill="#eef2f5" stroke="#9aa6b4" stroke-width="2"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="32" font-weight="700" fill="#2f3b4a">p</text>
+  <text x="330" y="250" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="32" font-weight="700" fill="#2f3b4a">q</text>
+  <text x="460" y="250" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="32" font-weight="700" fill="#2f3b4a">p∧q</text>
+  <line x1="140" y1="270" x2="520" y2="270" stroke="#9aa6b4" stroke-width="2"/>
+  <text x="200" y="320" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">T</text>
+  <text x="330" y="320" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">T</text>
+  <text x="460" y="320" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" font-weight="700" fill="#e71312">T</text>
+  <text x="200" y="370" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">T</text>
+  <text x="330" y="370" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="460" y="370" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="200" y="420" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="330" y="420" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">T</text>
+  <text x="460" y="420" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="200" y="470" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="330" y="470" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <text x="460" y="470" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="30" fill="#2f3b4a">F</text>
+  <rect x="160" y="520" width="80" height="54" rx="10" fill="#fff" stroke="#9aa6b4" stroke-width="2"/>
+  <text x="200" y="556" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f3b4a">∧</text>
+  <rect x="260" y="520" width="80" height="54" rx="10" fill="#fff" stroke="#9aa6b4" stroke-width="2"/>
+  <text x="300" y="556" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f3b4a">∨</text>
+  <rect x="360" y="520" width="80" height="54" rx="10" fill="#fff" stroke="#9aa6b4" stroke-width="2"/>
+  <text x="400" y="556" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f3b4a">→</text>
+  <rect x="460" y="520" width="80" height="54" rx="10" fill="#b7d4f5" stroke="#7aa7d4" stroke-width="2"/>
+  <text x="500" y="556" text-anchor="middle" font-family="Sarabun, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f3b4a">↔</text>
+</svg>
