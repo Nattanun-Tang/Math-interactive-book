@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>สมบัติของจำนวนจริง | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">สมบัติของจำนวนจริง</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="assets/picture/landing-cover.png"
+            alt=""
+            width="1200"
+            height="1310"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">สมบัติเกี่ยวกับระบบจำนวนจริง</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout props-real-app">
+            <div class="toolbar" role="group" aria-label="โหมดและตัวเลือก">
+              <div class="mode-bar">
+                <span id="modeLabel" class="toolbar__label">โหมด</span>
+                <div class="mode-toggle">
+                  <button id="modeLearnBtn" class="mode-btn mode-btn--active" type="button" data-mode="learn" aria-pressed="true">ศึกษา</button>
+                  <button id="modeTestBtn" class="mode-btn" type="button" data-mode="test" aria-pressed="false">ทดสอบ</button>
+                </div>
+              </div>
+              <div id="categoryBar" class="category-bar">
+                <span id="categoryLabel" class="toolbar__label">ตัวเลือก</span>
+                <label class="visually-hidden" for="categorySelect">ตัวเลือกเนื้อหา</label>
+                <select id="categorySelect" class="category-select"></select>
+              </div>
+            </div>
+
+            <section id="learnPanel" class="panel panel--learn" aria-label="โหมดศึกษา">
+              <p id="learnHint" class="learn-hint"></p>
+              <div id="learnStage" class="learn-stage"></div>
+            </section>
+
+            <section id="testPanel" class="panel panel--test" aria-label="โหมดทดสอบ" hidden>
+              <div class="test-nav" aria-label="เลื่อนข้อ">
+                <span id="testProgress" class="test-progress"></span>
+                <div class="test-dots-wrap">
+                  <button id="testPrevBtn" class="test-nav-btn" type="button" aria-label="ข้อก่อนหน้า">&lt;</button>
+                  <div id="testDots" class="test-dots" role="tablist" aria-label="หมายเลขข้อ"></div>
+                  <button id="testNextBtn" class="test-nav-btn" type="button" aria-label="ข้อถัดไป">&gt;</button>
+                </div>
+              </div>
+
+              <div class="test-card">
+                <p id="testInstruction" class="test-instruction"></p>
+                <div class="quiz-table-wrap">
+                  <table class="quiz-table" aria-label="ตารางระบุสมบัติปิด">
+                    <thead>
+                      <tr>
+                        <th scope="col" id="quizPropHeader">สมบัติ</th>
+                        <th scope="col" id="quizSetHeader"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="quizBody"></tbody>
+                  </table>
+                </div>
+
+                <div id="solutionBox" class="solution-box" hidden aria-live="polite"></div>
+
+                <div class="test-actions">
+                  <p id="testResult" class="result-line" hidden></p>
+                  <button id="checkBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                  <button id="revealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+
+      <div id="exampleModal" class="modal" hidden>
+        <div class="modal__backdrop" data-close="true"></div>
+        <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="exampleModalTitle">
+          <button id="exampleCloseBtn" class="modal__close" type="button" aria-label="ปิด">&times;</button>
+          <h2 id="exampleModalTitle" class="modal__title"></h2>
+          <div id="exampleModalBody" class="modal__body"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

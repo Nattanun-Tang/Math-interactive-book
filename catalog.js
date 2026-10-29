@@ -92,7 +92,43 @@ window.BOOK_CATALOG = [
       {
         id: "real-numbers",
         label: "จำนวนจริง",
-        items: []
+        items: [
+          {
+            id: "014",
+            title: "จำนวนจริง",
+            href: "M4/3.real number/014-real number/index.html"
+          },
+          {
+            id: "015",
+            title: "สมบัติของจำนวนจริง",
+            href: "M4/3.real number/015-properties of real numbers/index.html"
+          },
+          {
+            id: "016",
+            title: "พหุนาม",
+            href: "M4/3.real number/016-polynomials/index.html"
+          },
+          {
+            id: "017",
+            title: "การหารพหุนาม",
+            href: "M4/3.real number/017-polynomial division/index.html"
+          },
+          {
+            id: "018",
+            title: "ทฤษฎีบทที่เกี่ยวกับการแยกตัวประกอบพหุนาม",
+            href: "M4/3.real number/018-polynomial factorization theorems/index.html"
+          },
+          {
+            id: "019",
+            title: "การแยกตัวประกอบพหุนาม",
+            href: "M4/3.real number/019-polynomial factorization/index.html"
+          },
+          {
+            id: "020",
+            title: "การแก้สมการพหุนามตัวแปรเดียว",
+            href: "M4/3.real number/020-solving polynomial equations/index.html"
+          }
+        ]
       }
     ]
   },

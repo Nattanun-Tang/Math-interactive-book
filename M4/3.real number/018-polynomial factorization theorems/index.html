@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ทฤษฎีบทที่เกี่ยวกับการแยกตัวประกอบพหุนาม | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">ทฤษฎีบทที่เกี่ยวกับ<br>การแยกตัวประกอบพหุนาม</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="assets/picture/landing-cover.png"
+            alt=""
+            width="1200"
+            height="1310"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">ทฤษฎีบทที่เกี่ยวกับการแยกตัวประกอบพหุนาม</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout factor-app">
+            <div class="toolbar" role="group" aria-label="โหมดและทฤษฎีบท">
+              <div class="mode-bar">
+                <span id="modeLabel" class="toolbar__label">โหมด</span>
+                <div class="mode-toggle" role="group" aria-label="เลือกโหมด">
+                  <button id="modeLearnBtn" class="mode-btn mode-btn--active" type="button" data-mode="learn" aria-pressed="true">ศึกษา</button>
+                  <button id="modeTestBtn" class="mode-btn" type="button" data-mode="test" aria-pressed="false">ทดสอบ</button>
+                </div>
+              </div>
+              <div id="theoremBar" class="category-bar">
+                <span id="theoremLabel" class="toolbar__label">ทฤษฎีบท</span>
+                <label class="visually-hidden" for="theoremSelect">เลือกทฤษฎีบท</label>
+                <select id="theoremSelect" class="category-select"></select>
+              </div>
+            </div>
+
+            <section id="learnPanel" class="panel panel--learn" aria-label="โหมดศึกษา">
+              <article class="theory-card" aria-labelledby="theoryTitle">
+                <h2 id="theoryTitle" class="theory-card__title"></h2>
+                <div class="theorem-box">
+                  <div id="theoremBody" class="theorem-box__body"></div>
+                </div>
+              </article>
+
+              <article class="example-card" aria-labelledby="exampleTitle">
+                <h2 id="exampleTitle" class="example-card__title">ตัวอย่าง</h2>
+                <p id="examplePrompt" class="example-card__prompt"></p>
+                <div id="exampleLines" class="example-card__lines"></div>
+                <p id="exampleConclusion" class="example-card__conclusion"></p>
+              </article>
+            </section>
+
+            <section id="testPanel" class="panel panel--test" aria-label="โหมดทดสอบ" hidden>
+              <section class="test-define" aria-labelledby="defineLabel">
+                <h2 id="defineLabel" class="section-label">กำหนดพหุนาม</h2>
+
+                <div class="test-input-block">
+                  <div class="coeff-grid" role="group" aria-label="สัมประสิทธิ์ของพหุนาม">
+                    <div class="coeff-grid__corner" aria-hidden="true"></div>
+                    <div class="coeff-grid__head">$x^4$</div>
+                    <div class="coeff-grid__head">$x^3$</div>
+                    <div class="coeff-grid__head">$x^2$</div>
+                    <div class="coeff-grid__head">$x$</div>
+                    <div class="coeff-grid__head">$c$</div>
+
+                    <div id="dividendName" class="coeff-grid__name">ตัวตั้ง</div>
+                    <input class="coeff-input" id="p4" type="text" inputmode="numeric" data-poly="p" data-deg="4" maxlength="5" aria-label="สัมประสิทธิ์ของ x^4 ในตัวตั้ง" value="1">
+                    <input class="coeff-input" id="p3" type="text" inputmode="numeric" data-poly="p" data-deg="3" maxlength="5" aria-label="สัมประสิทธิ์ของ x^3 ในตัวตั้ง" value="-2">
+                    <input class="coeff-input" id="p2" type="text" inputmode="numeric" data-poly="p" data-deg="2" maxlength="5" aria-label="สัมประสิทธิ์ของ x^2 ในตัวตั้ง" value="-1">
+                    <input class="coeff-input" id="p1" type="text" inputmode="numeric" data-poly="p" data-deg="1" maxlength="5" aria-label="สัมประสิทธิ์ของ x ในตัวตั้ง" value="3">
+                    <input class="coeff-input" id="p0" type="text" inputmode="numeric" data-poly="p" data-deg="0" maxlength="5" aria-label="พจน์คงที่ของตัวตั้ง" value="1">
+
+                    <div id="divisorName" class="coeff-grid__name">ตัวหาร</div>
+                    <span class="coeff-grid__spacer" aria-hidden="true"></span>
+                    <span class="coeff-grid__spacer" aria-hidden="true"></span>
+                    <span class="coeff-grid__spacer" aria-hidden="true"></span>
+                    <input class="coeff-input" id="q1" type="text" inputmode="numeric" data-poly="q" data-deg="1" maxlength="5" aria-label="สัมประสิทธิ์ของ x ในตัวหาร" value="1">
+                    <input class="coeff-input" id="q0" type="text" inputmode="numeric" data-poly="q" data-deg="0" maxlength="5" aria-label="พจน์คงที่ของตัวหาร" value="-3">
+                  </div>
+
+                  <div class="poly-previews" aria-live="polite">
+                    <div id="pPreview" class="poly-preview"></div>
+                    <div id="qPreview" class="poly-preview"></div>
+                  </div>
+                </div>
+              </section>
+
+              <section id="workBox" class="work-box" aria-live="polite" aria-label="ขั้นตอนการหาเศษเหลือ">
+                <button id="workReset" class="stage-reset" type="button" aria-label="รีเฟรช" title="รีเฟรช">
+                  <svg class="stage-reset__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                    <path d="M21 12a9 9 0 1 1-3-6.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <div id="workBody" class="work-box__body"></div>
+                <div class="work-box__footer">
+                  <div class="work-nav" role="group" aria-label="ควบคุมขั้นตอน">
+                    <button id="prevBtn" class="proof-btn proof-btn--accent" type="button" disabled>ก่อนหน้า</button>
+                    <button id="nextBtn" class="proof-btn proof-btn--accent" type="button">ถัดไป</button>
+                    <button id="allBtn" class="proof-btn proof-btn--accent" type="button" aria-pressed="false">ทั้งหมด</button>
+                  </div>
+                </div>
+              </section>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

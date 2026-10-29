@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>จำนวนจริง | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">จำนวนจริง</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="assets/picture/landing-cover.png"
+            alt=""
+            width="1200"
+            height="1310"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">จำนวนจริง</h1>
+        </header>
+
+        <main class="app-content">
+          <div class="app-layout real-app">
+            <div class="mode-bar" role="group" aria-labelledby="modeLabel">
+              <span id="modeLabel" class="mode-bar__label">โหมด</span>
+              <div class="mode-toggle">
+                <button id="modeLearnBtn" class="mode-btn mode-btn--active" type="button" data-mode="learn" aria-pressed="true">ศึกษา</button>
+                <button id="modeTestBtn" class="mode-btn" type="button" data-mode="test" aria-pressed="false">ทดสอบ</button>
+              </div>
+            </div>
+
+            <!-- Learn mode -->
+            <section id="learnPanel" class="panel panel--learn" aria-label="โหมดศึกษา">
+              <p id="learnHint" class="learn-hint">เลือกแผ่นป้ายเพื่อศึกษา</p>
+              <div class="learn-stage">
+                <div id="treeView" class="tree-view">
+                  <div id="defBox" class="def-box" hidden>
+                    <button id="defCloseBtn" class="modal__close def-box__close" type="button" aria-label="ปิด">&times;</button>
+                    <div id="defBoxBody" class="def-box__body"></div>
+                  </div>
+
+                  <div class="number-tree" aria-label="แผนผังระบบจำนวนจริง">
+                    <svg class="number-tree__lines" viewBox="0 0 1100 680" preserveAspectRatio="none" aria-hidden="true">
+                      <!-- R → Q, Q' -->
+                      <path d="M550 80 L550 117.5 L319 117.5 L319 155 M550 117.5 L820 117.5 L820 155" />
+                      <!-- Q → Z, non-Z -->
+                      <path d="M319 227 L319 273.5 L220 273.5 L220 320 M319 273.5 L539 273.5 L539 320" />
+                      <!-- Z → Z-, Z0, Z+ -->
+                      <path d="M220 392 L220 456 L110 456 L110 520 M220 456 L319 456 L319 520 M220 456 L528 456 L528 520" />
+                    </svg>
+
+                    <button type="button" class="tree-node tree-node--r" data-node="real">จำนวนจริง</button>
+                    <button type="button" class="tree-node tree-node--q" data-node="rational">จำนวนตรรกยะ</button>
+                    <button type="button" class="tree-node tree-node--irr" data-node="irrational">จำนวนอตรรกยะ</button>
+                    <button type="button" class="tree-node tree-node--z" data-node="integer">จำนวนเต็ม</button>
+                    <button type="button" class="tree-node tree-node--nonz" data-node="nonInteger">จำนวนที่ไม่ใช่จำนวนเต็ม</button>
+                    <button type="button" class="tree-node tree-node--neg" data-node="negative">จำนวนเต็มลบ</button>
+                    <button type="button" class="tree-node tree-node--zero" data-node="zero">จำนวนเต็มศูนย์</button>
+                    <button type="button" class="tree-node tree-node--pos" data-node="positive">จำนวนเต็มบวก</button>
+                  </div>
+                </div>
+
+                <div id="vennView" class="venn-view" hidden>
+                  <button id="vennCloseBtn" class="modal__close venn-view__close" type="button" aria-label="ปิดแผนภาพเวนน์">&times;</button>
+                  <svg class="venn-svg" viewBox="0 0 1100 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="แผนภาพเวนน์ระบบจำนวนจริง">
+                    <!-- R -->
+                    <ellipse cx="550" cy="350" rx="510" ry="320" class="venn-r" />
+                    <foreignObject x="90" y="70" width="90" height="64">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo">$\mathbb{R}$</div>
+                    </foreignObject>
+
+                    <!-- Q (left) — disjoint from Q' -->
+                    <ellipse cx="380" cy="370" rx="270" ry="250" class="venn-q" />
+                    <foreignObject x="175" y="165" width="90" height="64">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo">$\mathbb{Q}$</div>
+                    </foreignObject>
+
+                    <!-- Q' (right) — disjoint from Q (Q ends at x=650) -->
+                    <ellipse cx="830" cy="370" rx="165" ry="165" class="venn-qp" />
+                    <foreignObject x="768" y="325" width="124" height="64">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo">$\mathbb{Q}'$</div>
+                    </foreignObject>
+
+                    <!-- Z (inside Q); label left of stacked ovals -->
+                    <ellipse cx="400" cy="400" rx="168" ry="168" class="venn-z" />
+                    <foreignObject x="248" y="365" width="70" height="56">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo">$\mathbb{Z}$</div>
+                    </foreignObject>
+
+                    <!-- Z-, Z0, Z+/N — centered inside Z, no stroke/text collision -->
+                    <ellipse cx="415" cy="318" rx="95" ry="38" class="venn-sub" />
+                    <foreignObject x="350" y="294" width="130" height="50">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo venn-fo--sm">$\mathbb{Z}^{-}$</div>
+                    </foreignObject>
+
+                    <ellipse cx="415" cy="400" rx="95" ry="38" class="venn-sub" />
+                    <foreignObject x="350" y="376" width="130" height="50">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo venn-fo--sm">$\mathbb{Z}^{0}$</div>
+                    </foreignObject>
+
+                    <ellipse cx="415" cy="482" rx="118" ry="38" class="venn-sub" />
+                    <foreignObject x="325" y="458" width="180" height="50">
+                      <div xmlns="http://www.w3.org/1999/xhtml" class="venn-fo venn-fo--sm">$\mathbb{Z}^{+},\,\mathbb{N}$</div>
+                    </foreignObject>
+                  </svg>
+                </div>
+              </div>
+
+              <label class="venn-toggle">
+                <input id="vennCheckbox" type="checkbox">
+                <span>แสดงระบบจำนวนจริงด้วยแผนภาพเวนน์</span>
+              </label>
+            </section>
+
+            <!-- Test mode -->
+            <section id="testPanel" class="panel panel--test" aria-label="โหมดทดสอบ" hidden>
+              <div class="test-toolbar">
+                <p id="testInstruction" class="test-instruction">
+                  ระบุชนิดของจำนวนต่อไปนี้ให้ถูกต้อง (ตอบได้มากกว่า 1 ชนิด)
+                </p>
+                <button id="shuffleBtn" class="action-btn action-btn--accent" type="button">สุ่ม</button>
+              </div>
+
+              <div class="quiz-table-wrap">
+                <table class="quiz-table" aria-label="ตารางระบุชนิดของจำนวน">
+                  <thead>
+                    <tr>
+                      <th scope="col">ข้อ</th>
+                      <th scope="col">จำนวน</th>
+                      <th scope="col">จำนวนนับ</th>
+                      <th scope="col">จำนวนเต็ม</th>
+                      <th scope="col">จำนวนตรรกยะ</th>
+                      <th scope="col">จำนวนอตรรกยะ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="quizBody"></tbody>
+                </table>
+              </div>
+
+              <div class="test-actions">
+                <p id="testResult" class="result-line" hidden></p>
+                <p id="testPopup" class="check-popup" role="alert" hidden></p>
+                <button id="checkBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                <button id="revealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
