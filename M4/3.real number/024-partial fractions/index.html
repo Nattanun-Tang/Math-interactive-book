@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>การแยกเศษส่วนย่อย | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">การแยกเศษส่วนย่อย</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="assets/picture/landing-cover.png"
+            alt=""
+            width="1200"
+            height="1310"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">การแยกเศษส่วนย่อย</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout pfd-app">
+            <div class="toolbar">
+              <div class="toolbar__left">
+                <div class="mode-bar" role="group" aria-labelledby="modeLabel">
+                  <span id="modeLabel" class="toolbar__label">โหมด</span>
+                  <div class="mode-toggle">
+                    <button id="modeBridgeBtn" class="mode-btn mode-btn--active" type="button" data-mode="bridge" aria-pressed="true">หลักการ</button>
+                    <button id="modeLearnBtn" class="mode-btn" type="button" data-mode="learn" aria-pressed="false">ศึกษา</button>
+                    <button id="modeTestBtn" class="mode-btn" type="button" data-mode="test" aria-pressed="false">ทดสอบ</button>
+                  </div>
+                </div>
+                <div id="typeBar" class="topic-bar" hidden>
+                  <label id="typeLabel" class="toolbar__label" for="typeSelect">ประเภทโจทย์</label>
+                  <select id="typeSelect" class="topic-select"></select>
+                </div>
+              </div>
+            </div>
+
+            <section id="bridgePanel" class="panel panel--bridge" aria-label="โหมดหลักการ">
+              <article class="work-card work-card--bridge">
+                <div id="bridgeBody" class="work-card__body"></div>
+              </article>
+            </section>
+
+            <section id="learnPanel" class="panel panel--learn" aria-label="โหมดศึกษา" hidden>
+              <div class="pager" aria-label="เลือกตัวอย่าง">
+                <span id="pagerLabel" class="pager__label">ข้อ 1/2</span>
+                <div class="pager__controls" role="group" aria-label="เลื่อนข้อ">
+                  <button id="pagerPrev" class="pager__arrow" type="button" aria-label="ข้อก่อนหน้า" disabled>&lt;</button>
+                  <div id="pagerDots" class="pager__dots"></div>
+                  <button id="pagerNext" class="pager__arrow" type="button" aria-label="ข้อถัดไป">&gt;</button>
+                </div>
+              </div>
+
+              <article id="learnCard" class="work-card" aria-live="polite">
+                <p id="learnPrompt" class="prompt-line"></p>
+                <div id="learnBody" class="work-card__body"></div>
+                <div class="step-nav" role="group" aria-label="ขั้นตอนวิธีทำ">
+                  <button id="prevBtn" class="action-btn action-btn--accent" type="button" disabled>ก่อนหน้า</button>
+                  <button id="nextBtn" class="action-btn action-btn--accent" type="button">ถัดไป</button>
+                </div>
+              </article>
+            </section>
+
+            <section id="testPanel" class="panel panel--test" aria-label="โหมดทดสอบ" hidden>
+              <div class="pager" aria-label="เลือกข้อทดสอบ">
+                <span id="testPagerLabel" class="pager__label">ข้อ 1/10</span>
+                <div class="pager__controls" role="group" aria-label="เลื่อนข้อ">
+                  <button id="testPagerPrev" class="pager__arrow" type="button" aria-label="ข้อก่อนหน้า" disabled>&lt;</button>
+                  <div id="testPagerDots" class="pager__dots"></div>
+                  <button id="testPagerNext" class="pager__arrow" type="button" aria-label="ข้อถัดไป">&gt;</button>
+                </div>
+              </div>
+
+              <article class="work-card work-card--test">
+                <div class="test-toolbar">
+                  <button id="testReset" class="stage-reset" type="button" aria-label="ล้าง" title="ล้าง">
+                    <svg class="stage-reset__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                      <path d="M21 12a9 9 0 1 1-3-6.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="prompt-row">
+                  <p id="testPrompt" class="prompt-line"></p>
+                  <button id="randomBtn" class="action-btn action-btn--accent" type="button">สุ่มโจทย์</button>
+                </div>
+
+                <div id="testBody" class="work-card__body"></div>
+
+                <div class="test-actions">
+                  <p id="testFeedback" class="test-feedback" role="status" aria-live="polite" hidden></p>
+                  <button id="checkBtn" class="action-btn action-btn--accent" type="button">ตรวจสอบ</button>
+                  <button id="revealBtn" class="action-btn action-btn--accent" type="button">เฉลย</button>
+                </div>
+              </article>
+            </section>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -537,7 +537,9 @@
   }
 
   function renderVenn() {
-    $("#vennMount").innerHTML = buildSvg();
+    const mount = $("#vennMount");
+    if (!mount) return;
+    mount.innerHTML = buildSvg();
   }
 
   function updateButtons() {
@@ -547,12 +549,13 @@
     const atEnd = state.step >= maxStep();
     const idle = state.step === 0;
 
-    prevBtn.disabled = idle || atStart;
-    nextBtn.disabled = idle || atEnd;
+    if (prevBtn) prevBtn.disabled = idle || atStart;
+    if (nextBtn) nextBtn.disabled = idle || atEnd;
   }
 
   function syncShell() {
     const layout = $("#appLayout");
+    if (!layout) return;
     layout.dataset.sets = String(state.sets);
     layout.dataset.step = String(state.step);
   }
@@ -646,17 +649,17 @@
     applyContent();
     renderAll();
 
-    $("#startButton").addEventListener("click", showApp);
+    $("#startButton")?.addEventListener("click", showApp);
 
     $$(".segmented__btn").forEach((btn) => {
       btn.addEventListener("click", () => setSets(Number(btn.dataset.sets)));
     });
 
-    $("#proveBtn").addEventListener("click", goProve);
-    $("#prevBtn").addEventListener("click", goPrev);
-    $("#nextBtn").addEventListener("click", goNext);
+    $("#proveBtn")?.addEventListener("click", goProve);
+    $("#prevBtn")?.addEventListener("click", goPrev);
+    $("#nextBtn")?.addEventListener("click", goNext);
 
-    $("#proofSteps").addEventListener("click", (event) => {
+    $("#proofSteps")?.addEventListener("click", (event) => {
       const card = event.target.closest(".proof-card");
       if (!card) return;
       selectCard(card.dataset.card);

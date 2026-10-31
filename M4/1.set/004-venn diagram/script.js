@@ -963,6 +963,7 @@
       } catch (_) {
         /* ignore */
       }
+      showApp({ focusTitle: false });
     }
   }
 

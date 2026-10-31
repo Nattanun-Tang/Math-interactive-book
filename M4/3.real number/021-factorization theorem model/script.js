@@ -21,6 +21,7 @@
     evalRoot: null,
     evalValue: null,
     rootsFound: [],
+    displayedFactors: [],
     quotient: null,
     quotient2: null,
     synthLocked: false,
@@ -258,10 +259,6 @@
     return {
       products,
       bottom,
-      quotient: bottom.slice(0, n - 1).map((x) => {
-        if (x.d !== 1) return x;
-        return x.n;
-      }),
       quotientRats: bottom.slice(0, n - 1),
       rem,
       remIsZero: ratIsZero(rem)
@@ -364,38 +361,33 @@
     return `${lead}x - ${Math.abs(constTerm)}`;
   }
 
-  function completeFactorLatex(roots, quadraticCoeffs) {
-    const parts = roots.map((c) => `(${linearFactorLatex(c)})`);
-    if (!quadraticCoeffs || quadraticCoeffs.length !== 3) {
-      return parts.join("");
-    }
-    let [a, b, c] = quadraticCoeffs;
-    // Fold remaining leading scale into last linear root if possible
-    const facts = factorQuadraticInts(a, b, c);
-    if (facts) {
-      facts.forEach((f) => parts.push(`(${f})`));
-      return parts.join("");
-    }
-    parts.push(`(${polyLatex(quadraticCoeffs)})`);
-    return parts.join("");
-  }
-
   function factorQuadraticInts(a, b, c) {
     const absA = Math.abs(a);
-    const absC = Math.abs(c);
-    const pCandidates = positiveDivisors(absA);
-    const qCandidates =
-      c === 0 ? [0] : [...positiveDivisors(absC), ...positiveDivisors(absC).map((x) => -x)];
+    // Prefer larger |p| first so e.g. 2x^2-4x → (2x)(x-2), not x(2x-4).
+    const pCandidates = positiveDivisors(absA).slice().reverse();
     for (const p of pCandidates) {
       if (a % p !== 0) continue;
-      const r = a / p;
+      const rLead = a / p;
+      if (c === 0) {
+        // (p x)(rLead x + s) with p*s = b
+        if (p !== 0 && b % p === 0) {
+          const s = b / p;
+          return [linearPairLatex(p, 0), linearPairLatex(rLead, s)];
+        }
+        // (p x + q)(rLead x) with q*rLead = b
+        if (rLead !== 0 && b % rLead === 0) {
+          const q = b / rLead;
+          return [linearPairLatex(p, q), linearPairLatex(rLead, 0)];
+        }
+        continue;
+      }
+      const absC = Math.abs(c);
+      const qCandidates = [...positiveDivisors(absC), ...positiveDivisors(absC).map((x) => -x)];
       for (const q of qCandidates) {
-        if (c === 0) {
-          if (q !== 0) continue;
-        } else if (q === 0 || c % q !== 0) continue;
-        const s = c === 0 ? 0 : c / q;
-        if (p * s + q * r === b) {
-          return [linearPairLatex(p, q), linearPairLatex(r, s)];
+        if (q === 0 || c % q !== 0) continue;
+        const s = c / q;
+        if (p * s + q * rLead === b) {
+          return [linearPairLatex(p, q), linearPairLatex(rLead, s)];
         }
       }
     }
@@ -412,12 +404,13 @@
   }
 
   function allRoundPathsOk(poly, roots) {
+    // After each possible first root, the absorbed quotient must stay workable for round 2.
     for (const root of roots) {
       const div = synthDivide(poly, root);
       if (!div.remIsZero) return false;
       let quot;
       try {
-        quot = quotientInts(div);
+        quot = absorbRootScale(quotientInts(div), root).quot;
       } catch {
         return false;
       }
@@ -997,9 +990,11 @@
     const root = state.rootsFound[round - 1];
     const coeffs = round === 1 ? state.problem.poly : state.quotient;
     const div = synthDivide(coeffs, root);
-    const quot = quotientInts(div);
+    // Fold (x - k/m)·Q into (m x - k)·(Q/m) so U(x) matches the written factorization.
+    const absorbed = absorbRootScale(quotientInts(div), root);
+    state.displayedFactors = [...state.displayedFactors, absorbed.factor];
     if (round === 1) {
-      state.quotient = quot;
+      state.quotient = absorbed.quot;
       state.synthLocked = true;
       if (state.problem.degree === 4) {
         state.phase = "needConstant2";
@@ -1015,7 +1010,7 @@
         state.quotient2 = null;
       }
     } else {
-      state.quotient2 = quot;
+      state.quotient2 = absorbed.quot;
       state.synth2Locked = true;
       state.phase = "done";
     }
@@ -1024,7 +1019,8 @@
 
   function checkSynth(round) {
     const root = state.rootsFound[round - 1];
-    const coeffs = round === 1 ? state.problem.poly : state.quotient;
+    const coeffs = round === 1 ? state.problem?.poly : state.quotient;
+    if (root == null || !coeffs?.length) return;
     const roundId = round === 1 ? "r1" : "r2";
     const result = validateRound(coeffs, root, roundId);
     if (!result.ok) return;
@@ -1032,28 +1028,31 @@
   }
 
   /* ---------- render ---------- */
-  /** (x - k/m) Q = (m x - k)(Q/m) — fold denominators into linear factors. */
-  function scaleQuotientByRoots(quotient, roots) {
-    const scale = roots.reduce((s, r) => s * asRat(r).d, 1);
-    if (scale === 1) return quotient;
-    if (quotient.every((c) => typeof c === "number" && c % scale === 0)) {
-      return quotient.map((c) => c / scale);
+  function renderFactoredProduct(linearFactors, quadraticCoeffs) {
+    const parts = linearFactors.map((f) => `(${f})`);
+    if (!quadraticCoeffs || quadraticCoeffs.length !== 3) {
+      return parts.join("");
     }
-    return quotient;
+    const facts = factorQuadraticInts(quadraticCoeffs[0], quadraticCoeffs[1], quadraticCoeffs[2]);
+    if (facts) {
+      facts.forEach((f) => parts.push(`(${f})`));
+      return parts.join("");
+    }
+    parts.push(`(${polyLatex(quadraticCoeffs)})`);
+    return parts.join("");
   }
 
   function renderIntermediateResult() {
     if (!state.synthLocked) return "";
     const p = state.problem;
-    const r1 = state.rootsFound[0];
+    const factor = state.displayedFactors[0];
     const u1 = state.quotient;
-    if (r1 == null || !u1) return "";
-    const absorbed = absorbRootScale(u1, r1);
+    if (!factor || !u1) return "";
     return `
       <div class="panel-block">
         <p class="result-line">
           <span class="result-line__label">${escapeHtml(ui().willGet || "จะได้")}</span>
-          $${p.polyTex} = (${absorbed.factor})(${polyLatex(absorbed.quot)})$
+          $${p.polyTex} = (${factor})(${polyLatex(u1)})$
         </p>
       </div>
     `;
@@ -1062,15 +1061,13 @@
   function renderFinalResult() {
     if (state.phase !== "done" && !state.synth2Locked) return "";
     const p = state.problem;
-    const r1 = state.rootsFound[0];
-    if (r1 == null) return "";
+    if (!state.displayedFactors.length) return "";
 
     let final = "";
-    if (state.synth2Locked && state.rootsFound[1] != null && state.quotient2) {
-      const roots = [r1, state.rootsFound[1]];
-      final = completeFactorLatex(roots, scaleQuotientByRoots(state.quotient2, roots));
+    if (state.synth2Locked && state.quotient2) {
+      final = renderFactoredProduct(state.displayedFactors, state.quotient2);
     } else if (p.degree === 3 && state.quotient) {
-      final = completeFactorLatex([r1], scaleQuotientByRoots(state.quotient, [r1]));
+      final = renderFactoredProduct(state.displayedFactors, state.quotient);
     } else {
       return "";
     }
@@ -1197,7 +1194,7 @@
             })
           )
           .join("")
-      : `<p class="drop-zone__hint">${copy.dropKmHint || ""}</p>`;
+      : `<p class="drop-zone__hint">${zoneLabelHtml(copy.dropKmHint || "")}</p>`;
 
     return `
       <div class="factor-zones" id="factorZones">
@@ -1408,7 +1405,7 @@ ${evalName}\\!\\left(${argTex}\\right) &= ${subst} \\\\
             <span>${escapeHtml(copy.uLabel || "ผลหาร")}</span>
             $U(x) = ${uTex}$
           </p>
-          ${renderCoeffCards(state.quotient, "coeffBank")}
+          ${showUCards ? renderCoeffCards(state.quotient, "coeffBank") : ""}
         </div>
       `;
 
@@ -1607,6 +1604,7 @@ ${evalName}\\!\\left(${argTex}\\right) &= ${subst} \\\\
     state.evalRoot = null;
     state.evalValue = null;
     state.rootsFound = [];
+    state.displayedFactors = [];
     state.quotient = null;
     state.quotient2 = null;
     state.synthLocked = false;
@@ -1626,10 +1624,14 @@ ${evalName}\\!\\left(${argTex}\\right) &= ${subst} \\\\
     const c = t();
     if (!c) return;
     const titleHtml = c.landing.title.replace(/\n/g, "<br>");
-    $("#landingEyebrow").textContent = c.landing.eyebrow;
-    $("#landingTitle").innerHTML = titleHtml;
-    $("#startButton").textContent = c.landing.start;
-    $("#appTitle").textContent = c.app.title;
+    const eyebrow = $("#landingEyebrow");
+    const landingTitle = $("#landingTitle");
+    const startButton = $("#startButton");
+    const appTitle = $("#appTitle");
+    if (eyebrow) eyebrow.textContent = c.landing.eyebrow;
+    if (landingTitle) landingTitle.innerHTML = titleHtml;
+    if (startButton) startButton.textContent = c.landing.start;
+    if (appTitle) appTitle.textContent = c.app.title;
     document.title = `${c.app.title} | Interactive Mathematics`;
   }
 
@@ -1645,7 +1647,7 @@ ${evalName}\\!\\left(${argTex}\\right) &= ${subst} \\\\
 
   function bootstrap() {
     applyContent();
-    $("#startButton").addEventListener("click", showApp);
+    $("#startButton")?.addEventListener("click", showApp);
     window.addEventListener("resize", () => {
       requestAnimationFrame(drawAllSynth);
     });

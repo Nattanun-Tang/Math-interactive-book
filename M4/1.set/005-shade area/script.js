@@ -519,6 +519,7 @@
 
   function bindCanvas() {
     const canvas = $("#vennCanvas");
+    if (!canvas) return;
     canvas.addEventListener("mousemove", (event) => {
       if (state.mode !== "explore") return;
       const svg = canvas.querySelector("svg");
@@ -738,16 +739,16 @@
   function bootstrap() {
     applyContent();
     bindLandingImage();
-    $("#startButton").addEventListener("click", showApp);
-    $("#btnExplore").addEventListener("click", () => setMode("explore"));
-    $("#btnShade").addEventListener("click", () => setMode("shade"));
-    $("#btnTwo").addEventListener("click", () => setSetCount(2));
-    $("#btnThree").addEventListener("click", () => setSetCount(3));
-    $("#writeToggle").addEventListener("change", (event) => setShowResult(event.target.checked));
-    $("#resetButton").addEventListener("click", clearShading);
-    $("#exprBackspace").addEventListener("click", popToken);
-    $("#exprClear").addEventListener("click", clearTokens);
-    $("#shadeApplyBtn").addEventListener("click", applyShadeFromExpression);
+    $("#startButton")?.addEventListener("click", showApp);
+    $("#btnExplore")?.addEventListener("click", () => setMode("explore"));
+    $("#btnShade")?.addEventListener("click", () => setMode("shade"));
+    $("#btnTwo")?.addEventListener("click", () => setSetCount(2));
+    $("#btnThree")?.addEventListener("click", () => setSetCount(3));
+    $("#writeToggle")?.addEventListener("change", (event) => setShowResult(event.target.checked));
+    $("#resetButton")?.addEventListener("click", clearShading);
+    $("#exprBackspace")?.addEventListener("click", popToken);
+    $("#exprClear")?.addEventListener("click", clearTokens);
+    $("#shadeApplyBtn")?.addEventListener("click", applyShadeFromExpression);
     bindCanvas();
   }
 

@@ -679,7 +679,7 @@
   }
 
   function bindEvents() {
-    $("#startButton").addEventListener("click", showApp);
+    $("#startButton")?.addEventListener("click", showApp);
 
     $$("#modeToggle [data-mode]").forEach((btn) => {
       btn.addEventListener("click", () => setMode(btn.dataset.mode));
@@ -711,13 +711,13 @@
       });
     });
 
-    $("#operationSelect").addEventListener("change", (e) => {
+    $("#operationSelect")?.addEventListener("change", (e) => {
       state.operation = e.target.value;
       ensureVariant();
       renderAll();
     });
 
-    $("#memberHint").addEventListener("click", (e) => {
+    $("#memberHint")?.addEventListener("click", (e) => {
       if (!e.target.closest("#clearMembersBtn")) return;
       clearSelectedMembers();
       if (state.mode === "test") clearExprResult();
@@ -725,7 +725,7 @@
       renderResult();
     });
 
-    $("#memberPanel").addEventListener("click", (e) => {
+    $("#memberPanel")?.addEventListener("click", (e) => {
       const chip = e.target.closest(".member-chip");
       if (!chip || chip.disabled) return;
       const setName = chip.dataset.set;
@@ -738,7 +738,7 @@
       renderResult();
     });
 
-    $("#variantPanel").addEventListener("change", (e) => {
+    $("#variantPanel")?.addEventListener("change", (e) => {
       const input = e.target.closest('input[name="opsVariant"]');
       if (!input) return;
       if (!input.checked) {
@@ -753,9 +753,9 @@
       renderResult();
     });
 
-    $("#exprBackspace").addEventListener("click", popToken);
-    $("#exprClear").addEventListener("click", clearTokens);
-    $("#exprShowBtn").addEventListener("click", showExpressionResult);
+    $("#exprBackspace")?.addEventListener("click", popToken);
+    $("#exprClear")?.addEventListener("click", clearTokens);
+    $("#exprShowBtn")?.addEventListener("click", showExpressionResult);
   }
 
   function bootstrap() {

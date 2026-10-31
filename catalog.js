@@ -132,6 +132,21 @@ window.BOOK_CATALOG = [
             id: "021",
             title: "แบบจำลองการแยกตัวประกอบด้วยทฤษฎีบท",
             href: "M4/3.real number/021-factorization theorem model/index.html"
+          },
+          {
+            id: "022",
+            title: "เศษส่วนของพหุนาม",
+            href: "M4/3.real number/022-rational expressions/index.html"
+          },
+          {
+            id: "023",
+            title: "การแก้สมการเศษส่วนของพหุนาม",
+            href: "M4/3.real number/023-solving rational equations/index.html"
+          },
+          {
+            id: "024",
+            title: "การแยกเศษส่วนย่อย",
+            href: "M4/3.real number/024-partial fractions/index.html"
           }
         ]
       }

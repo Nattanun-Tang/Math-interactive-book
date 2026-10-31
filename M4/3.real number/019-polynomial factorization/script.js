@@ -1164,21 +1164,26 @@
   function openInfo() {
     const ui = t()?.ui || {};
     const formulas = t()?.formulas || [];
-    $("#infoTitle").textContent = ui.infoTitle || "สูตรการแยกตัวประกอบ";
-    $("#infoBody").innerHTML = formulas
+    const title = $("#infoTitle");
+    const body = $("#infoBody");
+    if (!body) return;
+    if (title) title.textContent = ui.infoTitle || "สูตรการแยกตัวประกอบ";
+    body.innerHTML = formulas
       .map((f) => {
         if (typeof f === "string") return `<p class="formula-item">${f}</p>`;
         const nameHtml = `<span class="formula-item__name">${f.name || ""}</span>`;
         return `<p class="formula-item">${nameHtml}<span class="formula-item__tex">${f.tex}</span></p>`;
       })
       .join("");
-    renderMath($("#infoBody"));
-    $("#infoModal").hidden = false;
-    $("#infoCloseBtn").focus();
+    renderMath(body);
+    const modal = $("#infoModal");
+    if (modal) modal.hidden = false;
+    $("#infoCloseBtn")?.focus();
   }
 
   function closeInfo() {
-    $("#infoModal").hidden = true;
+    const modal = $("#infoModal");
+    if (modal) modal.hidden = true;
     $("#infoBtn")?.focus();
   }
 
@@ -1213,34 +1218,35 @@
 
   function bootstrap() {
     applyContent();
-    $("#startButton").addEventListener("click", showApp);
-    $("#modeLearnBtn").addEventListener("click", () => setMode("learn"));
-    $("#modeTestBtn").addEventListener("click", () => setMode("test"));
-    $("#pagerPrev").addEventListener("click", () => {
+    $("#startButton")?.addEventListener("click", showApp);
+    $("#modeLearnBtn")?.addEventListener("click", () => setMode("learn"));
+    $("#modeTestBtn")?.addEventListener("click", () => setMode("test"));
+    $("#pagerPrev")?.addEventListener("click", () => {
       if (state.learnIndex > 0) {
         state.learnIndex -= 1;
         renderLearn();
       }
     });
-    $("#pagerNext").addEventListener("click", () => {
+    $("#pagerNext")?.addEventListener("click", () => {
       const last = examples().length - 1;
       if (state.learnIndex < last) {
         state.learnIndex += 1;
         renderLearn();
       }
     });
-    $("#infoBtn").addEventListener("click", openInfo);
-    $("#infoCloseBtn").addEventListener("click", closeInfo);
-    $("#infoModal").addEventListener("click", (e) => {
+    $("#infoBtn")?.addEventListener("click", openInfo);
+    $("#infoCloseBtn")?.addEventListener("click", closeInfo);
+    $("#infoModal")?.addEventListener("click", (e) => {
       if (e.target?.dataset?.close) closeInfo();
     });
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !$("#infoModal").hidden) closeInfo();
+      const modal = $("#infoModal");
+      if (e.key === "Escape" && modal && !modal.hidden) closeInfo();
     });
-    $("#randomBtn").addEventListener("click", randomize);
-    $("#testReset").addEventListener("click", resetTestInputs);
-    $("#checkBtn").addEventListener("click", checkTest);
-    $("#revealBtn").addEventListener("click", revealTest);
+    $("#randomBtn")?.addEventListener("click", randomize);
+    $("#testReset")?.addEventListener("click", resetTestInputs);
+    $("#checkBtn")?.addEventListener("click", checkTest);
+    $("#revealBtn")?.addEventListener("click", revealTest);
     window.addEventListener("resize", () => {
       requestAnimationFrame(drawAllSynth);
     });

@@ -793,7 +793,7 @@
 
   function bootstrap() {
     applyContent();
-    runSelfTests();
+    if (/(?:^|[?&])selftest(?:[=&]|$)/.test(location.search)) runSelfTests();
     resetSlots("plain");
     $("#startButton")?.addEventListener("click", showApp);
   }
