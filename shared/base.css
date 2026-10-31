@@ -19,6 +19,10 @@
 }
 
 * { box-sizing: border-box; }
+html {
+  color-scheme: light;
+  caret-color: var(--ink);
+}
 html, body { margin: 0; min-height: 100%; }
 body {
   background: #eef1f4;
@@ -40,6 +44,45 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   outline-offset: 3px;
 }
 [hidden] { display: none !important; }
+
+/*
+  Windows (Chrome/Edge) often paints the system text I-beam white, so it vanishes
+  on light UI. Use a dark I-beam with a light halo; keep caret/selection readable.
+*/
+:root {
+  --cursor-text: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' viewBox='0 0 16 24'%3E%3Cpath d='M4 1h8M8 1v22M4 23h8' fill='none' stroke='%23ffffff' stroke-width='3.25' stroke-linecap='round'/%3E%3Cpath d='M4 1h8M8 1v22M4 23h8' fill='none' stroke='%2318202a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 8 12, text;
+}
+
+::selection {
+  background: #c8dbf5;
+  color: var(--ink);
+}
+
+input:is(
+  :not([type]),
+  [type="text"],
+  [type="search"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="tel"],
+  [type="number"]
+),
+textarea,
+[contenteditable="true"] {
+  color: var(--ink);
+  caret-color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  cursor: var(--cursor-text);
+}
+
+:where(
+  p, h1, h2, h3, h4, h5, h6,
+  li, label, td, th, dd, dt,
+  blockquote, pre, code, small
+):not(button *):not(a *):not([draggable="true"] *) {
+  cursor: var(--cursor-text);
+}
 
 .site-shell { min-height: 100vh; }
 .view { min-height: 100vh; }
@@ -166,20 +209,22 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   display: grid;
   place-items: center;
   min-height: 100vh;
+  min-height: 100dvh;
 }
+/*
+  Full-width shell (capped at --canvas-w). Do not letterbox to 16:9 —
+  that caused side gutters on non-16:9 screens. Keep height at the
+  viewport so one-screen lessons still fill via flex; tall lessons
+  override to height:auto + page scroll in their own styles.
+*/
 .app-main-card {
   position: relative;
-  width: min(
-    calc(var(--canvas-w) * 1px),
-    100vw,
-    calc(100vh * var(--canvas-w) / var(--canvas-h))
-  );
-  height: min(
-    calc(var(--canvas-h) * 1px),
-    100vh,
-    calc(100vw * var(--canvas-h) / var(--canvas-w))
-  );
-  aspect-ratio: var(--canvas-w) / var(--canvas-h);
+  width: min(calc(var(--canvas-w) * 1px), 100vw);
+  max-width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  aspect-ratio: auto;
   margin: 0 auto;
   overflow: hidden;
   background: var(--surface);

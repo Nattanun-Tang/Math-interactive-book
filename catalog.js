@@ -127,6 +127,11 @@ window.BOOK_CATALOG = [
             id: "020",
             title: "การแก้สมการพหุนามตัวแปรเดียว",
             href: "M4/3.real number/020-solving polynomial equations/index.html"
+          },
+          {
+            id: "021",
+            title: "แบบจำลองการแยกตัวประกอบด้วยทฤษฎีบท",
+            href: "M4/3.real number/021-factorization theorem model/index.html"
           }
         ]
       }

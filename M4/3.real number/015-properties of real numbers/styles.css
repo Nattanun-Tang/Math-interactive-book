@@ -42,7 +42,7 @@ body:has(#appPage.view--active) {
 }
 
 .app-page.view--active .app-main-card {
-  width: 100%;
+  width: min(calc(var(--canvas-w) * 1px), 100vw);
   max-width: 100%;
   height: auto;
   min-height: calc(100vh - var(--app-page-pad-y));
@@ -50,7 +50,7 @@ body:has(#appPage.view--active) {
   max-height: none;
   aspect-ratio: auto;
   overflow: visible;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .app-page.view--active .app-content {

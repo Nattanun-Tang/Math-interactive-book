@@ -23,14 +23,14 @@ body:has(#appPage.view--active) {
 }
 
 .app-main-card {
-  width: 100%;
+  width: min(calc(var(--canvas-w) * 1px), 100vw);
   max-width: 100%;
   aspect-ratio: auto;
   min-height: 100vh;
   min-height: 100dvh;
   height: auto;
   overflow: visible;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .app-content {

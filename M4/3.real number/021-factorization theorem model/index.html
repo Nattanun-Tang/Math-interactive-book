@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>แบบจำลองการแยกตัวประกอบด้วยทฤษฎีบท | Interactive Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <section id="landingPage" class="view view--active landing" aria-labelledby="landingTitle">
+      <div class="landing__frame">
+        <div class="landing__copy">
+          <p id="landingEyebrow" class="eyebrow">INTERACTIVE MATHEMATICS</p>
+          <div class="landing__title-block">
+            <h1 id="landingTitle" class="landing__title">แบบจำลองการแยกตัวประกอบ<br>ด้วยทฤษฎีบท</h1>
+            <button id="startButton" class="primary-button landing__start" type="button">เริ่ม</button>
+          </div>
+        </div>
+        <div class="landing__visual" aria-hidden="true">
+          <img
+            class="landing__visual-image"
+            src="assets/picture/landing-cover.png"
+            alt=""
+            width="1200"
+            height="1310"
+            decoding="async"
+            onerror="this.hidden=true;this.parentElement?.classList.add('landing__visual--empty');"
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="appPage" class="view app-page" aria-labelledby="appTitle" hidden>
+      <div class="app-main-card">
+        <header class="app-header">
+          <h1 id="appTitle" class="app-header__title" tabindex="-1">แบบจำลองการแยกตัวประกอบด้วยทฤษฎีบท</h1>
+        </header>
+
+        <main id="contentGrid" class="app-content">
+          <div id="appLayout" class="app-layout model-app">
+            <div id="stage" class="stage" aria-live="polite"></div>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
